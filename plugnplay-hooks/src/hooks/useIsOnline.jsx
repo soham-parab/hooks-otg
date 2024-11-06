@@ -1,12 +1,7 @@
 import React from "react";
-import { isOnlineCallbacks } from "./type";
 
-export function useIsOnline({
-  onOnline,
-  onOffline,
-  skipFirstRender = false,
-}: isOnlineCallbacks) {
-  const [isOnline, setIsOnline] = React.useState<boolean>(navigator.onLine);
+export function useIsOnline({ onOnline, onOffline, skipFirstRender = false }) {
+  const [isOnline, setIsOnline] = React.useState(navigator.onLine);
 
   const handleOnline = () => setIsOnline(true);
   const handleOffline = () => setIsOnline(false);
