@@ -6,9 +6,9 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: "src/index.ts",
-      name: "plug-n-play-hooks",
-      fileName: (format) => `plugnplay.${format}.js`,
+      entry: "src/index.js",
+      name: "hooks-on-the-go",
+      fileName: (format) => `hooks-on-the-go.${format}.js`,
     },
     rollupOptions: {
       external: ["react", "react-dom"],
