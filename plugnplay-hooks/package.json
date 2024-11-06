@@ -21,7 +21,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "hooks-on-the-go": "^0.0.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
