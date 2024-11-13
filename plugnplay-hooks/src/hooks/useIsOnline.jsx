@@ -2,37 +2,33 @@ import React from "react";
 
 export function useIsOnline({ onOnline, onOffline, skipFirstRender = false }) {
   const [isOnline, setIsOnline] = React.useState(navigator.onLine);
+  const isFirstRender = React.useRef(true);
 
-  const handleOnline = () => setIsOnline(true);
-  const handleOffline = () => setIsOnline(false);
+  const handleOnline = React.useCallback(() => {
+    setIsOnline(true);
+  }, []);
 
-  const skipRef = React.useRef(!skipFirstRender);
+  const handleOffline = React.useCallback(() => {
+    setIsOnline(false);
+  }, []);
 
   React.useEffect(() => {
-    if (skipFirstRender) {
-      skipRef.current = true;
+    if (skipFirstRender && isFirstRender.current) {
+      isFirstRender.current = false;
       return;
     }
-    if (skipRef.current)
-      if (isOnline) {
-        try {
-          if (typeof onOnline === "function") onOnline();
-        } catch (error) {
-          console.error(
-            "useIsOnline: onOnline callback is not a function",
-            error
-          );
-        }
-      } else {
-        try {
-          if (typeof onOffline === "function") onOffline();
-        } catch (error) {
-          console.error(
-            "useIsOnline: onOffline callback is not a function",
-            error
-          );
-        }
+
+    const callback = isOnline ? onOnline : onOffline;
+    if (typeof callback === "function") {
+      try {
+        callback();
+      } catch (error) {
+        console.error(
+          `useIsOnline: ${isOnline ? "onOnline" : "onOffline"} callback error:`,
+          error
+        );
       }
+    }
 
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
@@ -41,7 +37,7 @@ export function useIsOnline({ onOnline, onOffline, skipFirstRender = false }) {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
     };
-  }, [isOnline, onOnline, onOffline, skipRef.current]);
+  }, [isOnline, onOnline, onOffline, skipFirstRender]);
 
   return isOnline;
 }
