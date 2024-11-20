@@ -1,14 +1,14 @@
 {
   "name": "hooks-on-the-go",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.2",
   "type": "module",
-  "main": "./dist/hooks-on-the-go.es.js",
-  "module": "./dist/hooks-on-the-go.umd.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/hooks-on-the-go.es.js",
-      "require": "./dist/hooks-on-the-go.umd.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
