@@ -1,6 +1,6 @@
 import React from "react";
 
-export function useIsOnline({ onOnline, onOffline, skipFirstRender = false }) {
+export function useIsOnline(onOnline, onOffline, skipFirstRender = false) {
   const [isOnline, setIsOnline] = React.useState(navigator.onLine);
   const isFirstRender = React.useRef(true);
 
