@@ -1,14 +1,21 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import path from "path";
+import { fileURLToPath } from "url";
 
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: "src/index.js",
+      entry: path.resolve(__dirname, "src/index.js"),
       name: "hooks-on-the-go",
-      fileName: (format) => `hooks-on-the-go.${format}.js`,
+      formats: ["es", "cjs"],
+      fileName: (format) => `index.${format === "es" ? "js" : "cjs"}`,
     },
     rollupOptions: {
       external: ["react", "react-dom"],
@@ -17,6 +24,7 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDOM",
         },
+        exports: "named",
       },
     },
   },
