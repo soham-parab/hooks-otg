@@ -1,7 +1,7 @@
 {
   "name": "hooks-on-the-go",
   "private": false,
-  "version": "0.0.6",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/hooks-on-the-go.es.js",
   "module": "./dist/hooks-on-the-go.umd.js",
